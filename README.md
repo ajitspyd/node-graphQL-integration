@@ -1,5 +1,9 @@
 # node-graphQL-integration
 Sample node app to integration graphQL
 
+Recommended extension to vscode: GraphQL by Orsen Kucher
 
-Hit npm start to build the app.
+To build the app run
+```
+    npm start
+```
