@@ -32,6 +32,19 @@ const typeDefs = gql`
         GERMANY,
         CHILE
     }
+
+    input CreateUserInput {
+        name: String!
+        username: String!
+        age: Int!,
+        nationality: Nationality
+    }
+
+    type Mutation {
+        createUser(user: CreateUserInput!): User!
+        updateUser(username: String!, age: Int): User!
+        deleteUser(id: Int!): User!
+    }
 `
 
 module.exports = { typeDefs };

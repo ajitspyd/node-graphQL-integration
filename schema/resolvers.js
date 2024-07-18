@@ -31,6 +31,31 @@ const resolvers = {
 
             return movie
         }
+    },
+    Mutation: {
+        createUser: (parent, args) => {
+            const user = args.user
+            const lastId = UserList[UserList.length - 1].id
+            user.id = lastId + 1
+            UserList.push(user)
+            return user
+        },
+        updateUser: (parent, args) => {
+            const username = args.username
+            const updatedAge = args.age
+            const userToUpdate = UserList.find((existingUser) => {
+                return existingUser.username === username
+            })
+
+
+            userToUpdate.age = updatedAge
+            return userToUpdate
+        },
+        deleteUser: (parent, args) => {
+            const id = args.id
+            _.remove(UserList, (user) => user.id === Number(id))
+            return null
+        }
     }
 }
 
