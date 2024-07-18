@@ -10,7 +10,7 @@ To build the app run
 Visit http://localhost:4000 to view apollo server.
 Click on button "Query your server". It should launch https://studio.apollographql.com/sandbox/explorer
 
-try query to fetch names of all the user
+Basic query to fetch names of all the user
 ```
     query ExampleQuery {
       users {
@@ -22,3 +22,25 @@ try query to fetch names of all the user
       }
     }
 ```
+
+Query with variables. 
+```
+    query getUser($userId: ID!) {
+      user(id: $userId) {
+        name
+        age
+        nationality
+        friends {
+          name
+        }
+        username
+      }
+    }
+```
+Make sure you specify variables in variables section to make it work.
+Example: 
+    ```
+    {
+      "userId": 1
+    }
+    ```
