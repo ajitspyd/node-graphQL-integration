@@ -1,4 +1,4 @@
-# node-graphQL-integration
+ node-graphQL-integration
 Sample node app to integration graphQL
 
 Recommended extension to vscode: GraphQL by Orsen Kucher
@@ -10,7 +10,7 @@ To build the app run
 Visit http://localhost:4000 to view apollo server.
 Click on button "Query your server". It should launch https://studio.apollographql.com/sandbox/explorer
 
-Basic query to fetch names of all the user
+## Basic query to fetch names of all the user
 ```
     query ExampleQuery {
       users {
@@ -23,7 +23,8 @@ Basic query to fetch names of all the user
     }
 ```
 
-Query with variables. 
+## Query with variables. 
+1. Get specific user details from user id
 ```
     query getUser($userId: ID!) {
       user(id: $userId) {
@@ -44,3 +45,58 @@ Example:
       "userId": 1
     }
     ```
+
+## Mutation examples:
+1. Create new user
+```
+    mutation createUser($user: CreateUserInput!) {
+       createUser(user: $user) {
+         id
+         name
+         age
+       }
+    }
+```
+Make sure you specify variables 
+```
+    "user": {
+        "name": "Joseph",
+        "age": 35,
+        "username": "joseph35",
+        "nationality": "GERMANY"
+      }
+  ````
+
+2. Update existing user
+
+```
+    mutation updateUser($updateUserUsername: String!, $age: Int) {
+       updateUser(username: $updateUserUsername, age: $age) {
+         username
+         age
+         name
+       }
+    }
+```
+Make sure you specify variables 
+```
+    {
+         "updateUserUsername": "kelly2019"
+    }
+```
+
+3. Delete user
+```
+    mutation deleteUser($id: Int!) {
+      deleteUser(id: $id) {
+        id
+      }
+    }
+```
+Make sure you specify variables 
+```
+    {
+         "updateUserUsername": "kelly2019"
+    }
+```
+
