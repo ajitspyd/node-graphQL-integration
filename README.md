@@ -3,8 +3,17 @@ Sample node app to integration graphQL
 
 Recommended extension to vscode: GraphQL by Orsen Kucher
 
-To build the app run
+To install depencencies and run server app
+
 ```
+    npm install
+    npm start
+```
+
+To build the react app and run client
+```
+    cd client/
+    npm install
     npm start
 ```
 Visit http://localhost:4000 to view apollo server.
