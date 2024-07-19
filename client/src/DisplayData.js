@@ -23,9 +23,26 @@ const QUERY_ALL_MOVIES = gql`
   }
 `
 
+const GET_MOVIE_BY_NAME = gql`
+  query Movie($name: String!) {
+    movie(name: $name) {
+      name
+      yearOfPublication
+    }
+  }
+`;
+
 function DisplayData(){
+    const [movieSearched, setMovieSearched] = useState("");
+
     const { data } = useQuery(QUERY_ALL_USERS)
     const { data: movieData } = useQuery(QUERY_ALL_MOVIES);
+    const [
+        fetchMovie,
+        { data: movieSearchedData, error: movieError },
+      ] = useLazyQuery(GET_MOVIE_BY_NAME);
+
+      
     return <div>
         {
             data && data.users.map((user) => {
@@ -49,6 +66,37 @@ function DisplayData(){
                 );
             })
         }
+
+        <input
+          type="text"
+          placeholder="Interstellar..."
+          onChange={(event) => {
+            setMovieSearched(event.target.value);
+          }}
+        />
+        <button
+          onClick={() => {
+            fetchMovie({
+              variables: {
+                name: movieSearched,
+              },
+            });
+          }}
+        >
+          Fetch Data
+        </button>
+
+        <div>
+          {movieSearchedData && (
+            <div>
+              <h1>MovieName: {movieSearchedData.movie.name}</h1>
+              <h1>
+                Year Of Publication: {movieSearchedData.movie.yearOfPublication}
+              </h1>{" "}
+            </div>
+          )}
+          {movieError && <h1> There was an error fetching the data</h1>}
+        </div>
     </div>
 }
 
